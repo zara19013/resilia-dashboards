@@ -815,11 +815,19 @@
     :not([data-theme="light"]) .card:hover { animation: cardGlowPulse 2.4s ease-in-out infinite; }
 
     /* ─── Satellite dish — light mode ─── */
-    /* Single filter on the wrapper: desaturate + brighten the whole SVG */
-    [data-theme="light"] .hero-dish-wrap {
-      filter: saturate(0.35) brightness(0.55) hue-rotate(195deg);
-      opacity: 0.72;
-    }
+    [data-theme="light"] .hero-dish-halo   { opacity: 0.08; }
+    [data-theme="light"] .hero-dish-sig    { stroke: #059669 !important; opacity: 0.6; }
+    [data-theme="light"] .hero-dish-strut  { stroke: #818cf8 !important; opacity: 0.55; }
+    [data-theme="light"] .hero-dish-dark   { fill: #c7d2fe !important; stroke: #818cf8 !important; }
+    [data-theme="light"] .hero-dish-lnb-inner  { fill: #eef2ff !important; }
+    [data-theme="light"] .hero-dish-dot        { fill: #6366f1 !important; }
+    [data-theme="light"] .hero-dish-pivot-dot  { fill: #818cf8 !important; opacity: 0.8; }
+    [data-theme="light"] .hero-dish-bowl   { stroke: #818cf8 !important; opacity: 0.6; }
+    [data-theme="light"] .hero-dish-fill   { fill: rgba(99,102,241,0.06) !important; }
+    [data-theme="light"] .hero-dish-sheen  { stroke: #a5b4fc !important; opacity: 0.5; }
+    [data-theme="light"] .hero-dish-rim    { stroke: #a5b4fc !important; opacity: 0.3; }
+    [data-theme="light"] .hero-dish-pole   { stroke: #a5b4fc !important; opacity: 0.45; }
+    [data-theme="light"] .hero-dish-brace  { fill: #e0e7ff !important; stroke: #a5b4fc !important; opacity: 0.7; }
 
     /* ─── Leaderboard split panel ─── */
     .lb-split {

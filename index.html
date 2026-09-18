@@ -815,62 +815,10 @@
     :not([data-theme="light"]) .card:hover { animation: cardGlowPulse 2.4s ease-in-out infinite; }
 
     /* ─── Satellite dish — light mode ─── */
-    /* Halo: nearly invisible, just a faint hint */
-    [data-theme="light"] .hero-dish-halo {
-      opacity: 0.15 !important;
-    }
-    /* Signal arcs: teal stays, but slightly muted */
-    [data-theme="light"] .hero-dish-sig {
-      stroke: #10b981 !important;
-      opacity: 0.75 !important;
-    }
-    /* Feed struts: soft indigo instead of vivid purple */
-    [data-theme="light"] .hero-dish-strut {
-      stroke: rgba(99,102,241,0.5) !important;
-      opacity: 0.8 !important;
-    }
-    /* LNB housing: light slate-blue, not dark navy */
-    [data-theme="light"] .hero-dish-dark {
-      fill: rgba(99,102,241,0.15) !important;
-      stroke: rgba(99,102,241,0.45) !important;
-    }
-    /* LNB inner: white on light bg is invisible — use indigo */
-    [data-theme="light"] .hero-dish-lnb-inner {
-      fill: rgba(99,102,241,0.25) !important;
-    }
-    [data-theme="light"] .hero-dish-dot,
-    [data-theme="light"] .hero-dish-pivot-dot {
-      fill: #6366f1 !important;
-      opacity: 0.7 !important;
-    }
-    /* Bowl stroke: soft periwinkle instead of dark gradient */
-    [data-theme="light"] .hero-dish-bowl {
-      stroke: rgba(99,102,241,0.45) !important;
-    }
-    /* Dish fill: very faint */
-    [data-theme="light"] .hero-dish-fill {
-      fill: rgba(99,102,241,0.06) !important;
-    }
-    /* Inner sheen: use indigo instead of white (invisible on light) */
-    [data-theme="light"] .hero-dish-sheen {
-      stroke: rgba(99,102,241,0.3) !important;
-      opacity: 1 !important;
-    }
-    /* Rim dashed chord */
-    [data-theme="light"] .hero-dish-rim {
-      stroke: rgba(99,102,241,0.2) !important;
-      opacity: 1 !important;
-    }
-    /* Pole, base bar, feet: soft indigo lines */
-    [data-theme="light"] .hero-dish-pole {
-      stroke: rgba(99,102,241,0.28) !important;
-      opacity: 1 !important;
-    }
-    /* Mounting brace: almost invisible */
-    [data-theme="light"] .hero-dish-brace {
-      fill: rgba(99,102,241,0.08) !important;
-      stroke: rgba(99,102,241,0.25) !important;
-      opacity: 1 !important;
+    /* Single filter on the wrapper: desaturate + brighten the whole SVG */
+    [data-theme="light"] .hero-dish-wrap {
+      filter: saturate(0.35) brightness(0.55) hue-rotate(195deg);
+      opacity: 0.72;
     }
 
     /* ─── Leaderboard split panel ─── */
@@ -933,7 +881,7 @@
     </div>
 
     <!-- ── Satellite dish illustration ── -->
-    <div style="display:flex; justify-content:center; align-items:center; margin-bottom:18px;">
+    <div class="hero-dish-wrap" style="display:flex; justify-content:center; align-items:center; margin-bottom:18px;">
       <svg width="90" height="70" viewBox="-5 -20 210 192" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;">
         <defs>
           <!-- Ambient halo -->

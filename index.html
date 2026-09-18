@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Resilia · Performance Command</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -44,24 +44,6 @@
       mask-image: radial-gradient(ellipse 75% 75% at 50% 40%, black 20%, transparent 80%);
     }
 
-    /* ─── Ambient blobs ─── */
-    .blobs {
-      position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
-    }
-    .blob {
-      position: absolute; border-radius: 50%; filter: blur(140px); opacity: 0.09;
-      animation: blobMove 20s ease-in-out infinite;
-    }
-    .b1 { width: 700px; height: 700px; background: radial-gradient(circle, #4285F4, #1a5fd8); top:-250px; left:-200px; animation-delay:0s; opacity:0.13; }
-    .b2 { width: 600px; height: 600px; background: radial-gradient(circle, #34A853, #0d6b30); bottom:-200px; right:-150px; animation-delay:-7s; opacity:0.11; }
-    .b3 { width: 500px; height: 500px; background: radial-gradient(circle, #a78bfa, #6d28d9); top:35%; left:40%; animation-delay:-14s; opacity:0.09; }
-    .b4 { width: 400px; height: 400px; background: radial-gradient(circle, #FBBC05, #c97a00); bottom:20%; left:10%; animation-delay:-10s; opacity:0.08; }
-
-    @keyframes blobMove {
-      0%,100% { transform: translate(0,0) scale(1); }
-      33% { transform: translate(40px,-30px) scale(1.08); }
-      66% { transform: translate(-25px,20px) scale(0.93); }
-    }
 
     /* ─── Page wrapper ─── */
     .page { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; padding: 0 24px 60px; }
@@ -69,14 +51,14 @@
     /* ─── Hero ─── */
     .hero {
       text-align: center;
-      padding: 96px 0 36px;
+      padding: 80px 0 12px;
       display: flex; flex-direction: column; align-items: center;
     }
 
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 7px;
       background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 30px; padding: 5px 14px; margin-bottom: 14px;
+      border-radius: 30px; padding: 4px 12px; margin-bottom: 16px;
       font-size: 10px; font-weight: 600; letter-spacing: 0.14em;
       text-transform: uppercase; color: var(--muted);
     }
@@ -130,19 +112,35 @@
       text-transform: uppercase; color: rgba(255,255,255,0.22);
     }
 
+    .hero-brand {
+      display: flex; align-items: center; justify-content: center;
+      gap: 14px; margin-bottom: 4px;
+    }
+
     .hero-title {
-      font-size: 68px; font-weight: 900; letter-spacing: -0.05em; line-height: 0.95;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 62px; font-weight: 900; letter-spacing: 0.01em; line-height: 1;
       background: linear-gradient(110deg,
-        #4285F4 0%, #6faeff 15%,
-        #34A853 32%, #7affa8 44%,
-        #FBBC05 56%, #ffe066 62%,
-        #EA4335 76%, #ff8080 86%,
-        #4285F4 100%
+        #4ade80  0%,
+        #60a5fa 22%,
+        #a78bfa 42%,
+        #ffffff 55%,
+        #a78bfa 68%,
+        #60a5fa 82%,
+        #4ade80 100%
       );
       background-size: 220% auto;
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      animation: shimmer 5s linear infinite;
-      filter: drop-shadow(0 0 30px rgba(66,133,244,0.2));
+      animation: titleColorSlide 7s ease-in-out infinite;
+    }
+
+    @keyframes titleColorSlide {
+      0%, 100% { background-position: 0% center; }
+      50%       { background-position: 220% center; }
+    }
+
+    @keyframes titleGlow {
+      0%, 100% { filter: none; }
     }
 
     @keyframes shimmer {
@@ -161,12 +159,12 @@
     }
 
     .hero-desc {
-      font-size: 13.5px; color: var(--muted); font-weight: 400;
-      max-width: 440px; margin: 0 auto 20px; line-height: 1.6;
+      font-size: 12px; color: var(--muted); font-weight: 400;
+      max-width: 440px; margin: 0 auto 18px; line-height: 1.6;
     }
 
     .hero-pills {
-      display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap;
+      display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; margin-bottom: 20px;
     }
 
     .hero-pill {
@@ -183,27 +181,23 @@
 
     /* ─── Stats bar ─── */
     .stats-bar {
-      display: flex; gap: 1px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px; overflow: hidden;
-      margin-bottom: 48px;
-      backdrop-filter: blur(12px);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 24px rgba(0,0,0,0.3);
+      display: flex; align-items: center; justify-content: center;
+      gap: 0; margin-bottom: 28px;
     }
     .stat-item {
-      flex: 1; padding: 14px 20px; background: rgba(255,255,255,0.018);
-      text-align: center; transition: background 0.22s;
+      display: flex; align-items: center; gap: 6px;
+      padding: 0 18px;
+      border-right: 1px solid rgba(255,255,255,0.08);
     }
-    .stat-item:hover { background: rgba(255,255,255,0.04); }
+    .stat-item:last-child { border-right: none; }
+
     .stat-num {
-      font-size: 22px; font-weight: 900; letter-spacing: -0.03em;
-      background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.55) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      font-size: 13px; font-weight: 800; letter-spacing: -0.02em;
+      color: var(--sc, #fff);
     }
     .stat-label {
-      font-size: 9px; color: rgba(255,255,255,0.28); font-weight: 600;
-      letter-spacing: 0.1em; text-transform: uppercase; margin-top: 3px;
+      font-size: 9px; color: rgba(255,255,255,0.3); font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
     }
 
     /* ─── Section ─── */
@@ -412,6 +406,41 @@
       font-size: 10px; color: rgba(255,255,255,0.12); font-weight: 400; letter-spacing: 0.04em;
     }
 
+    @keyframes zaraPulse {
+      0%, 100% { box-shadow: 0 0 18px rgba(66,133,244,0.2), inset 0 1px 0 rgba(255,255,255,0.1); }
+      50%       { box-shadow: 0 0 32px rgba(66,133,244,0.38), inset 0 1px 0 rgba(255,255,255,0.14); }
+    }
+
+    /* ─── Access note banner ─── */
+    .access-note {
+      display: flex; align-items: center; gap: 14px;
+      background: linear-gradient(135deg, rgba(66,133,244,0.07), rgba(52,168,83,0.05));
+      border: 1px solid rgba(66,133,244,0.18);
+      border-left: 3px solid #4285F4;
+      border-radius: 12px; padding: 14px 18px;
+      margin-bottom: 32px;
+      backdrop-filter: blur(12px);
+    }
+    .access-note-icon {
+      font-size: 20px; flex-shrink: 0;
+      width: 38px; height: 38px; border-radius: 10px;
+      background: rgba(66,133,244,0.12); border: 1px solid rgba(66,133,244,0.2);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .access-note-text { flex: 1; }
+    .access-note-title {
+      font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 3px;
+    }
+    .access-note-sub {
+      font-size: 11px; color: rgba(255,255,255,0.38); line-height: 1.5;
+    }
+    .access-note-badge {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
+      color: #93c5fd; background: rgba(66,133,244,0.12);
+      border: 1px solid rgba(66,133,244,0.25); border-radius: 8px;
+      padding: 5px 12px; white-space: nowrap; flex-shrink: 0;
+    }
+
     /* ─── Tab navigation ─── */
     .tab-nav {
       display: flex; gap: 4px;
@@ -468,8 +497,9 @@
     }
     .topnav-left { display: flex; align-items: center; gap: 0; }
     .topnav-logo {
-      font-size: 15px; font-weight: 900; letter-spacing: -0.04em;
-      background: linear-gradient(90deg, #4285F4, #34A853, #FBBC05, #EA4335);
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 16px; font-weight: 700; letter-spacing: 0.01em;
+      background: linear-gradient(90deg, #4ade80, #86efac, #ffffff, #86efac, #4ade80);
       background-size: 220% auto;
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
       animation: shimmer 5s linear infinite;
@@ -523,9 +553,9 @@
     }
 
     @media (max-width: 640px) {
-      .hero-title { font-size: 44px; }
+      .hero-title { font-size: 52px; }
       .grid { grid-template-columns: 1fr; }
-      .stats-bar { flex-direction: column; }
+      .stats-bar { flex-wrap: wrap; gap: 6px; }
       .lb-split { grid-template-columns: 1fr; }
       .lb-cards-2 { grid-template-columns: 1fr; }
     }
@@ -536,15 +566,6 @@
 <!-- Aurora -->
 <div class="aurora"></div>
 
-<!-- Ambient blobs -->
-<div class="blobs">
-  <div class="blob b1"></div>
-  <div class="blob b2"></div>
-  <div class="blob b3"></div>
-  <div class="blob b4"></div>
-  <div class="blob" style="width:320px;height:320px;background:radial-gradient(circle,#EA4335,#7f1d1d);top:45%;right:-80px;animation-delay:-4s;opacity:0.05;"></div>
-  <div class="blob" style="width:260px;height:260px;background:radial-gradient(circle,#34d399,#064e3b);bottom:12%;left:32%;animation-delay:-17s;opacity:0.04;"></div>
-</div>
 
 <!-- Fixed navbar -->
 <nav class="topnav">
@@ -574,8 +595,8 @@
     </div>
 
     <!-- ── Satellite dish illustration ── -->
-    <div style="display:flex; justify-content:center; align-items:center; margin-bottom:14px;">
-      <svg width="158" height="124" viewBox="-5 -20 210 192" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;">
+    <div style="display:flex; justify-content:center; align-items:center; margin-bottom:18px;">
+      <svg width="90" height="70" viewBox="-5 -20 210 192" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;">
         <defs>
           <!-- Ambient halo -->
           <radialGradient id="hBg" cx="50%" cy="55%" r="50%">
@@ -596,12 +617,12 @@
           </linearGradient>
           <!-- Glow filter -->
           <filter id="hGl" x="-35%" y="-35%" width="170%" height="170%">
-            <feGaussianBlur stdDeviation="4" result="b"/>
+            <feGaussianBlur stdDeviation="1" result="b"/>
             <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
           <!-- Signal glow filter -->
           <filter id="hSg" x="-10%" y="-100%" width="120%" height="300%">
-            <feGaussianBlur stdDeviation="3.5" result="b"/>
+            <feGaussianBlur stdDeviation="1" result="b"/>
             <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
         </defs>
@@ -615,20 +636,20 @@
         <path class="hero-sig s3" d="M31,1   C42,-18 158,-18 169,1"   stroke="#34d399" stroke-width="1.8" fill="none" stroke-linecap="round" filter="url(#hSg)"/>
 
         <!-- Feed struts (arms holding LNB) -->
-        <line x1="56"  y1="87" x2="100" y2="49" stroke="#a78bfa" stroke-width="2"   stroke-linecap="round" opacity="0.8"/>
-        <line x1="144" y1="87" x2="100" y2="49" stroke="#a78bfa" stroke-width="2"   stroke-linecap="round" opacity="0.8"/>
+        <line x1="56"  y1="87" x2="100" y2="49" stroke="#a78bfa" stroke-width="2.5" stroke-linecap="round" opacity="0.95"/>
+        <line x1="144" y1="87" x2="100" y2="49" stroke="#a78bfa" stroke-width="2.5" stroke-linecap="round" opacity="0.95"/>
 
         <!-- Feed horn / LNB -->
-        <circle cx="100" cy="49" r="9"   fill="#091b6e" stroke="#60a5fa" stroke-width="2.2" filter="url(#hGl)"/>
-        <circle cx="100" cy="49" r="4"   fill="white"   opacity="0.92"/>
-        <circle cx="100" cy="49" r="1.5" fill="#60a5fa" opacity="0.7"/>
+        <circle cx="100" cy="49" r="9"   fill="#091b6e" stroke="#60a5fa" stroke-width="2.5"/>
+        <circle cx="100" cy="49" r="4"   fill="white"   opacity="1"/>
+        <circle cx="100" cy="49" r="1.5" fill="#60a5fa" opacity="1"/>
 
         <!-- Dish bowl (large parabolic arc) -->
-        <path d="M22,101 C22,47 178,47 178,101" stroke="url(#hDish)" stroke-width="5" fill="none" stroke-linecap="round" filter="url(#hGl)"/>
+        <path d="M22,101 C22,47 178,47 178,101" stroke="url(#hDish)" stroke-width="6" fill="none" stroke-linecap="round"/>
         <!-- Dish translucent fill -->
         <path d="M22,101 C22,47 178,47 178,101 Z" fill="url(#hFill)"/>
         <!-- Inner highlight sheen -->
-        <path d="M46,97 C46,67 154,67 154,97" stroke="white" stroke-width="1.2" fill="none" opacity="0.09"/>
+        <path d="M46,97 C46,67 154,67 154,97" stroke="white" stroke-width="1.5" fill="none" opacity="0.18"/>
         <!-- Rim dashed chord -->
         <line x1="22" y1="101" x2="178" y2="101" stroke="#4285F4" stroke-width="1.5" opacity="0.14" stroke-dasharray="6 5"/>
 
@@ -648,18 +669,34 @@
       </svg>
     </div>
 
-    <div style="margin-bottom: 12px; text-align:center;">
-      <div class="hero-title" style="font-size:62px; margin-bottom: 6px; line-height:1;">RESILIA</div>
-      <div style="font-size: 12px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.2);">PERFORMANCE COMMAND</div>
+    <div style="margin-bottom: 16px; text-align:center;">
+      <div class="hero-brand">
+        <div class="hero-title">RESILIA</div>
+      </div>
+      <div style="
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 10px; font-weight: 500; letter-spacing: 0.42em;
+        text-transform: uppercase;
+        color: rgba(134,239,172,0.45);
+        margin-top: 6px;
+      ">Performance Command</div>
     </div>
 
     <div class="hero-desc">
-      Resilia's unified hub for all ad performance dashboards,spend attribution, creative analytics, leaderboards, and editor tools in one place.
+      Resilia's unified hub for all ad performance dashboards, spend attribution, creative analytics, leaderboards, and editor tools in one place.
     </div>
 
     <div class="hero-pills">
-      <div class="hero-pill pill-zara">
-        <span>👤</span> Managed by Zara
+      <div class="hero-pill pill-zara" style="
+        padding: 7px 16px;
+        font-size: 12.5px; font-weight: 700;
+        background: linear-gradient(135deg, rgba(66,133,244,0.18), rgba(52,168,83,0.1));
+        border: 1px solid rgba(66,133,244,0.4);
+        box-shadow: 0 0 18px rgba(66,133,244,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
+        color: #93c5fd;
+        animation: zaraPulse 3s ease-in-out infinite;
+      ">
+        <span style="font-size:14px;">👤</span> Managed by <strong style="color:#fff;font-weight:800;">Zara Noor</strong>
       </div>
       <div class="hero-pill">
         <span style="color:#34d399;">●</span> 7 Dashboards
@@ -670,24 +707,15 @@
     </div>
   </div>
 
-  <!-- ── Stats bar ── -->
-  <div class="stats-bar">
-    <div class="stat-item">
-      <div class="stat-num" style="background:linear-gradient(135deg,#60a5fa,#4285F4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">7</div>
-      <div class="stat-label">Dashboards</div>
+
+  <!-- ── Access note ── -->
+  <div class="access-note">
+    <div class="access-note-icon">🔐</div>
+    <div class="access-note-text">
+      <div class="access-note-title">Need access to a dashboard?</div>
+      <div class="access-note-sub">All dashboards are managed by <strong style="color:rgba(255,255,255,0.7);">Zara Noor</strong>. Reach out to her directly for login access, permissions, or any questions about these tools.</div>
     </div>
-    <div class="stat-item">
-      <div class="stat-num" style="background:linear-gradient(135deg,#34d399,#34A853);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">2</div>
-      <div class="stat-label">Groups</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num" style="background:linear-gradient(135deg,#fbbf24,#FBBC05);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">4</div>
-      <div class="stat-label">Categories</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num" style="background:linear-gradient(135deg,#f87171,#EA4335);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">24/7</div>
-      <div class="stat-label">Live Data</div>
-    </div>
+    <div class="access-note-badge">Contact Zara Noor</div>
   </div>
 
   <!-- ── Tab navigation ── -->
@@ -976,6 +1004,241 @@ window.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.section').forEach(s => obs.observe(s));
 
 });
+</script>
+
+<!-- ── Chat Widget ── -->
+<style>
+  .chat-fab {
+    position: fixed; bottom: 28px; right: 28px; z-index: 1000;
+    width: 52px; height: 52px; border-radius: 50%; border: none; cursor: pointer;
+    background: linear-gradient(135deg, #4ade80, #60a5fa);
+    box-shadow: 0 4px 24px rgba(74,222,128,0.35), 0 0 0 1px rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-size: 22px;
+  }
+  .chat-fab:hover { transform: scale(1.08); box-shadow: 0 6px 32px rgba(74,222,128,0.5); }
+
+  .chat-window {
+    position: fixed; bottom: 92px; right: 28px; z-index: 1000;
+    width: 360px; height: 500px;
+    background: rgba(6,6,20,0.92);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(30px) saturate(1.8);
+    box-shadow: 0 24px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    transform: translateY(16px) scale(0.97);
+    opacity: 0; pointer-events: none;
+    transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;
+  }
+  .chat-window.open { transform: translateY(0) scale(1); opacity: 1; pointer-events: all; }
+
+  .chat-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    background: rgba(255,255,255,0.03);
+    flex-shrink: 0;
+  }
+  .chat-header-icon {
+    width: 32px; height: 32px; border-radius: 10px; flex-shrink: 0;
+    background: linear-gradient(135deg, rgba(74,222,128,0.2), rgba(96,165,250,0.15));
+    border: 1px solid rgba(74,222,128,0.3);
+    display: flex; align-items: center; justify-content: center; font-size: 15px;
+  }
+  .chat-header-info { flex: 1; }
+  .chat-header-name { font-size: 13px; font-weight: 700; color: #fff; }
+  .chat-header-status { font-size: 10px; color: rgba(74,222,128,0.8); font-weight: 500; display: flex; align-items: center; gap: 4px; }
+  .chat-header-status::before { content:''; width:5px; height:5px; border-radius:50%; background:#4ade80; display:inline-block; }
+  .chat-close {
+    background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.3);
+    font-size: 18px; padding: 2px 4px; line-height: 1;
+    transition: color 0.15s;
+  }
+  .chat-close:hover { color: rgba(255,255,255,0.7); }
+
+  .chat-messages {
+    flex: 1; overflow-y: auto; padding: 14px 14px 8px;
+    display: flex; flex-direction: column; gap: 10px;
+    scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.1) transparent;
+  }
+  .chat-messages::-webkit-scrollbar { width: 4px; }
+  .chat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+
+  .chat-msg {
+    display: flex; flex-direction: column; gap: 3px;
+    max-width: 85%;
+  }
+  .chat-msg.user { align-self: flex-end; align-items: flex-end; }
+  .chat-msg.bot  { align-self: flex-start; align-items: flex-start; }
+
+  .chat-bubble {
+    padding: 9px 13px; border-radius: 14px;
+    font-size: 12.5px; line-height: 1.55; font-family: 'Inter', sans-serif;
+  }
+  .chat-msg.user .chat-bubble {
+    background: linear-gradient(135deg, rgba(74,222,128,0.2), rgba(96,165,250,0.15));
+    border: 1px solid rgba(74,222,128,0.25);
+    color: rgba(255,255,255,0.92);
+    border-bottom-right-radius: 4px;
+  }
+  .chat-msg.bot .chat-bubble {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.85);
+    border-bottom-left-radius: 4px;
+    white-space: pre-wrap;
+  }
+  .chat-msg.bot.loading .chat-bubble {
+    display: flex; gap: 4px; align-items: center; padding: 12px 14px;
+  }
+  .chat-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.3);
+    animation: chatDot 1.2s ease-in-out infinite;
+  }
+  .chat-dot:nth-child(2) { animation-delay: 0.2s; }
+  .chat-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes chatDot { 0%,80%,100%{opacity:0.2;transform:scale(0.8);} 40%{opacity:1;transform:scale(1);} }
+
+  .chat-footer {
+    padding: 10px 12px 14px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    flex-shrink: 0;
+  }
+  .chat-input-row {
+    display: flex; gap: 8px; align-items: flex-end;
+  }
+  .chat-input {
+    flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 9px 13px; color: #fff;
+    font-size: 12.5px; font-family: 'Inter', sans-serif; resize: none;
+    outline: none; max-height: 80px; line-height: 1.45;
+    transition: border-color 0.15s;
+  }
+  .chat-input::placeholder { color: rgba(255,255,255,0.25); }
+  .chat-input:focus { border-color: rgba(74,222,128,0.4); }
+  .chat-send {
+    width: 36px; height: 36px; border-radius: 10px; border: none; cursor: pointer;
+    background: linear-gradient(135deg, #4ade80, #60a5fa);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; flex-shrink: 0;
+    transition: transform 0.15s, opacity 0.15s;
+  }
+  .chat-send:hover { transform: scale(1.06); }
+  .chat-send:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+  .chat-hint { font-size: 9.5px; color: rgba(255,255,255,0.18); margin-top: 6px; text-align: center; }
+</style>
+
+<!-- FAB button -->
+<button class="chat-fab" id="chatFab" title="Ask the AI assistant">💬</button>
+
+<!-- Chat window -->
+<div class="chat-window" id="chatWindow">
+  <div class="chat-header">
+    <div class="chat-header-icon">✦</div>
+    <div class="chat-header-info">
+      <div class="chat-header-name">Resilia Assistant</div>
+      <div class="chat-header-status">Live data · BigQuery</div>
+    </div>
+    <button class="chat-close" id="chatClose">✕</button>
+  </div>
+
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-msg bot">
+      <div class="chat-bubble">Hi! I have live data from all Resilia dashboards. Ask me anything — top editors, delivery counts, pipeline status, revisions, and more. 📊</div>
+    </div>
+  </div>
+
+  <div class="chat-footer">
+    <div class="chat-input-row">
+      <textarea class="chat-input" id="chatInput" rows="1" placeholder="Ask about editors, deliveries, pipeline…"></textarea>
+      <button class="chat-send" id="chatSend">↑</button>
+    </div>
+    <div class="chat-hint">Powered by Claude · Live BigQuery data</div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const API = 'https://oo-pipeline-app.vercel.app/api/chat';
+  const fab    = document.getElementById('chatFab');
+  const win    = document.getElementById('chatWindow');
+  const close  = document.getElementById('chatClose');
+  const input  = document.getElementById('chatInput');
+  const send   = document.getElementById('chatSend');
+  const msgs   = document.getElementById('chatMessages');
+  let history  = [];
+  let busy     = false;
+
+  fab.addEventListener('click', () => { win.classList.toggle('open'); if (win.classList.contains('open')) input.focus(); });
+  close.addEventListener('click', () => win.classList.remove('open'));
+
+  // Auto-resize textarea
+  input.addEventListener('input', () => {
+    input.style.height = 'auto';
+    input.style.height = Math.min(input.scrollHeight, 80) + 'px';
+  });
+
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+  });
+  send.addEventListener('click', sendMessage);
+
+  function appendMsg(role, text, loading = false) {
+    const wrap = document.createElement('div');
+    wrap.className = `chat-msg ${role}${loading ? ' loading' : ''}`;
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-bubble';
+    if (loading) {
+      bubble.innerHTML = '<div class="chat-dot"></div><div class="chat-dot"></div><div class="chat-dot"></div>';
+    } else {
+      bubble.textContent = text;
+    }
+    wrap.appendChild(bubble);
+    msgs.appendChild(wrap);
+    msgs.scrollTop = msgs.scrollHeight;
+    return wrap;
+  }
+
+  async function sendMessage() {
+    const text = input.value.trim();
+    if (!text || busy) return;
+    busy = true;
+    send.disabled = true;
+
+    appendMsg('user', text);
+    input.value = '';
+    input.style.height = 'auto';
+
+    const loader = appendMsg('bot', '', true);
+
+    try {
+      const res = await fetch(API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text, history }),
+      });
+      const data = await res.json();
+      const reply = data.reply || data.error || 'Something went wrong.';
+
+      loader.remove();
+      appendMsg('bot', reply);
+
+      history.push({ role: 'user', content: text });
+      history.push({ role: 'assistant', content: reply });
+      if (history.length > 20) history = history.slice(-20);
+    } catch (e) {
+      loader.remove();
+      appendMsg('bot', 'Failed to connect. Please try again.');
+    }
+
+    busy = false;
+    send.disabled = false;
+    input.focus();
+  }
+})();
 </script>
 </body>
 </html>

@@ -1351,6 +1351,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
 <!-- ── Chat Widget ── -->
 <style>
+  @keyframes fabJiggle {
+    0%, 100% { transform: translateY(0); }
+    20%       { transform: translateY(-8px); }
+    40%       { transform: translateY(-4px); }
+    60%       { transform: translateY(-7px); }
+    80%       { transform: translateY(-2px); }
+  }
+
   .chat-fab {
     position: fixed; bottom: 28px; right: 28px; z-index: 1000;
     width: 52px; height: 52px; border-radius: 50%; border: none; cursor: pointer;
@@ -1359,8 +1367,13 @@ window.addEventListener('DOMContentLoaded', () => {
     display: flex; align-items: center; justify-content: center;
     transition: transform 0.2s, box-shadow 0.2s;
     font-size: 22px;
+    animation: fabJiggle 1.8s ease-in-out infinite;
   }
-  .chat-fab:hover { transform: scale(1.08); box-shadow: 0 6px 32px rgba(74,222,128,0.5); }
+  .chat-fab:hover {
+    animation: none;
+    transform: scale(1.08);
+    box-shadow: 0 6px 32px rgba(74,222,128,0.5);
+  }
 
   .chat-window {
     position: fixed; bottom: 92px; right: 28px; z-index: 1000;

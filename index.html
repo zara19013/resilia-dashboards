@@ -1352,27 +1352,48 @@ window.addEventListener('DOMContentLoaded', () => {
 <!-- ── Chat Widget ── -->
 <style>
   @keyframes fabJiggle {
-    0%, 100% { transform: translateY(0); }
-    20%       { transform: translateY(-8px); }
-    40%       { transform: translateY(-4px); }
-    60%       { transform: translateY(-7px); }
-    80%       { transform: translateY(-2px); }
+    0%        { transform: translateY(0) scale(1) rotate(0deg); box-shadow: 0 4px 24px rgba(74,222,128,0.35); }
+    15%       { transform: translateY(-12px) scale(1.08) rotate(-4deg); box-shadow: 0 16px 40px rgba(74,222,128,0.55); }
+    30%       { transform: translateY(-6px) scale(1.03) rotate(3deg); box-shadow: 0 10px 30px rgba(96,165,250,0.45); }
+    45%       { transform: translateY(-10px) scale(1.06) rotate(-2deg); box-shadow: 0 14px 36px rgba(74,222,128,0.5); }
+    60%       { transform: translateY(-3px) scale(1.01) rotate(1deg); box-shadow: 0 6px 20px rgba(96,165,250,0.35); }
+    75%       { transform: translateY(-8px) scale(1.04) rotate(-1deg); box-shadow: 0 12px 32px rgba(74,222,128,0.45); }
+    90%       { transform: translateY(-2px) scale(1.01) rotate(0deg); }
+    100%      { transform: translateY(0) scale(1) rotate(0deg); box-shadow: 0 4px 24px rgba(74,222,128,0.35); }
   }
 
-  .chat-fab {
+  @keyframes fabPulseRing {
+    0%   { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(2.2); opacity: 0; }
+  }
+
+  .chat-fab-wrap {
     position: fixed; bottom: 28px; right: 28px; z-index: 1000;
+    width: 52px; height: 52px;
+  }
+
+  .chat-fab-wrap::before,
+  .chat-fab-wrap::after {
+    content: '';
+    position: absolute; inset: 0; border-radius: 50%;
+    background: rgba(74,222,128,0.4);
+    animation: fabPulseRing 1.8s ease-out infinite;
+  }
+  .chat-fab-wrap::after { animation-delay: 0.9s; }
+
+  .chat-fab {
+    position: relative; z-index: 1;
     width: 52px; height: 52px; border-radius: 50%; border: none; cursor: pointer;
     background: linear-gradient(135deg, #4ade80, #60a5fa);
     box-shadow: 0 4px 24px rgba(74,222,128,0.35), 0 0 0 1px rgba(255,255,255,0.1);
     display: flex; align-items: center; justify-content: center;
-    transition: transform 0.2s, box-shadow 0.2s;
     font-size: 22px;
-    animation: fabJiggle 1.8s ease-in-out infinite;
+    animation: fabJiggle 2.2s cubic-bezier(.36,.07,.19,.97) infinite;
   }
   .chat-fab:hover {
     animation: none;
-    transform: scale(1.08);
-    box-shadow: 0 6px 32px rgba(74,222,128,0.5);
+    transform: scale(1.12);
+    box-shadow: 0 8px 36px rgba(74,222,128,0.6);
   }
 
   .chat-window {
@@ -1488,7 +1509,9 @@ window.addEventListener('DOMContentLoaded', () => {
 </style>
 
 <!-- FAB button -->
-<button class="chat-fab" id="chatFab" title="Ask the AI assistant">💬</button>
+<div class="chat-fab-wrap">
+  <button class="chat-fab" id="chatFab" title="Ask the AI assistant">💬</button>
+</div>
 
 <!-- Chat window -->
 <div class="chat-window" id="chatWindow">
